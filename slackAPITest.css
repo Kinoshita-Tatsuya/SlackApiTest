@@ -1,0 +1,150 @@
+.messageBox
+{
+    width: 100%;
+    margin: 40px 0;
+    overflow: hidden;
+}
+
+.header
+{
+    position:fixed;
+    width:100%;
+    height: 8%;
+    left:0;
+    top:0;
+
+    background:rgb(0, 0, 0);    
+    z-index: 10;
+}
+
+.header p
+{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    margin: 30px;
+    color: #FFF;
+}
+
+.header a
+{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 3%;
+    right: 30px;
+    color: #FFF;
+}
+
+.time
+{ 
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0 325;    
+}
+
+.chat .icon
+{
+    width: 2%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.chat
+{
+    width: 100%;
+    text-align: left;
+    margin: 50px 0 0 0 ;
+}
+
+.othersComment
+{
+    display: inline-block;
+    position: relative; 
+    margin: 0 0 0 40px;
+    top: -20px;
+    padding: 10px;
+    max-width: 50%;
+    border-radius: 12px;
+    background: #edf1ee;
+}
+
+.othersComment::after
+{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 3px; 
+    left: -19px;
+    border: 8px solid transparent;
+    border-right: 18px solid #edf1ee;
+    transform: rotate(35deg);
+}
+
+.myComment 
+{
+    display: inline-block;
+    position: relative; 
+    margin: 0 10px 0 0;
+    padding: 8px;
+    max-width: 250px;
+    border-radius: 12px;
+    background: #30e852;
+    font-size: 15px;
+}
+  
+.myComment::after
+{
+    content: "";
+    position: absolute;
+    top: 3px; 
+    right: -19px;
+    border: 8px solid transparent;
+    border-left: 18px solid #30e852;
+    -webkit-transform: rotate(-35deg);
+    transform: rotate(-35deg);
+}
+
+.chat .userName
+{
+    position: relative;
+    top: -30px;
+    left: 50px;
+    line-height: 1;
+    font-size: 15px;
+    background: #FFF;
+    color: #19191a;
+}
+
+.PostTime
+{
+    display: inline-block;
+}
+
+#SendBox
+{
+    position: fixed;
+    display: inline-block;
+
+    width: 100%; 
+    height: 10%;
+    top: 90%;
+
+    z-index: 10;
+}
+
+#SendButton
+{
+    position: fixed;
+    display: inline-block;
+    
+    width: 2%; height: 2%;
+    top: 93%; left: 90%;
+    text-align: center;
+
+    padding: 10px;
+
+    color: #edf1ee;
+    background-color: #21cc29;
+    z-index: 10;
+}
