@@ -1,4 +1,4 @@
-const token = "xoxp-380106888994-381209183639-699184962310-c69918f112a9b8e6b2612ea8ebd7ca27";
+const token = "Dummy";
 const channelID = "CB74M5Y6B";
 let userMap = new Map();
 
