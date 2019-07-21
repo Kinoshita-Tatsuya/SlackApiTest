@@ -32,7 +32,7 @@ const ShowMessages = response =>
 
         if(userMap.get(userId).profile.real_name === "Kinoshita Tatsuya")
         {
-            CreateMyCommentDivs(userId ,messages[i]);
+            CreateMyCommentDivs(messages[i]);
             continue;
         }
         
@@ -42,14 +42,19 @@ const ShowMessages = response =>
 
 const CreateMyCommentDivs =  message =>
 {
+    let myCommentFrame = document.createElement("div");
+    myCommentFrame.classList.add("myCommentFrame");
+
     let myComment = document.createElement("div");
     myComment.classList.add("myComment");
     myComment.textContent = message.text;
 
-    let messagesBox = document.querySelector(".messageBox");
-    messagesBox.appendChild(myComment);
-
     ShowPostTime(message.ts,myComment);
+    myCommentFrame.appendChild(myComment);
+
+    let messagesBox = document.querySelector(".messageBox");
+    messagesBox.appendChild(myCommentFrame);
+
 }
 
 const CreateOtherUserCommentDivs = (userId, message) =>
@@ -119,17 +124,14 @@ const CreateUserMap = () =>
 
     let xhr = new XMLHttpRequest();
 
-    xhr.onload= () =>
-    {
-        let response = JSON.parse(xhr.responseText);    
-        for(let i = 0;i < response.members.length;++i)
-        {
-            userMap.set(response.members[i].id,response.members[i]);
-        }
-    }
-
-    xhr.open("GET",url,true);
+    xhr.open("GET",url,false);
     xhr.send(null);
+
+    let response = JSON.parse(xhr.responseText);    
+    for(let i = 0;i < response.members.length;++i)
+    {
+        userMap.set(response.members[i].id,response.members[i]);
+    }
 }
 
 const sendMessage = () =>
