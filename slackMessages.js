@@ -1,6 +1,7 @@
 const token = "Dummy";
-const channelID = "CB74M5Y6B";
+const channelID = "CD3LD7M2L";
 let userMap = new Map();
+const myID = "UB6K2GA4D"
 
 const GetMessages = ts =>
 {
@@ -30,7 +31,7 @@ const ShowMessages = response =>
     {
         const userId = messages[i].user;
 
-        if(userMap.get(userId).profile.real_name === "Kinoshita Tatsuya")
+        if(myID === userId)
         {
             CreateMyCommentDivs(messages[i]);
             continue;
@@ -38,6 +39,11 @@ const ShowMessages = response =>
         
         CreateOtherUserCommentDivs(userId ,messages[i]);
     }
+}
+
+const IsBot = (message) =>
+{
+    return message.hasOwnProperty("username");
 }
 
 const CreateMyCommentDivs =  message =>
@@ -61,7 +67,8 @@ const CreateOtherUserCommentDivs = (userId, message) =>
 {
     //アイコン表示
     let iconElm = document.createElement("img");
-    iconElm.setAttribute("src",userMap.get(userId).profile.image_192);
+    const image = (IsBot(message))? null :userMap.get(userId).profile.image_192;
+    iconElm.setAttribute("src", image);
     iconElm.classList.add("icon");
     
     //吹き出し表示
@@ -76,7 +83,8 @@ const CreateOtherUserCommentDivs = (userId, message) =>
     //ユーザーの名前表示
     let userNameElm = document.createElement("div");
     userNameElm.classList.add("userName");
-    userNameElm.textContent = userMap.get(userId).real_name;
+    const name = (IsBot(message))? message.username : userMap.get(userId).real_name;
+    userNameElm.textContent = name;
 
     let messagesBox = document.querySelector(".messageBox");
     chatElm.append(iconElm);
@@ -90,10 +98,10 @@ const CreateOtherUserCommentDivs = (userId, message) =>
 const ShowPostTime = (ts, elm) =>
 {
     let date = new Date(ts * 1000);
-    let month = date.getMonth();
-    let day = date.getDay();
-    let hour = date.getHours();
-    let min = date.getMinutes();
+    const month = date.getMonth();
+    const day = date.getDay();
+    const hour = date.getHours();
+    const min = date.getMinutes();
 
     let postTime = document.createElement("div");
     postTime.classList.add("PostTime");
