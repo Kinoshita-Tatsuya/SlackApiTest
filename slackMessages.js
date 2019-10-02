@@ -1,5 +1,5 @@
-const token = "Dummy";
-const channelID = "CD3LD7M2L";
+const token = "dummy";
+const channelID = "CB74M5Y6B";
 let userMap = new Map();
 const myID = "UB6K2GA4D"
 
@@ -8,7 +8,7 @@ const GetMessages = ts =>
     let xhr = new XMLHttpRequest();
     xhr.onload = () =>
     {
-        let responseCH = JSON.parse(xhr.responseText);
+        const responseCH = JSON.parse(xhr.responseText);
         ShowMessages(responseCH);
 
         if(responseCH.has_more)
@@ -98,10 +98,15 @@ const CreateOtherUserCommentDivs = (userId, message) =>
 const ShowPostTime = (ts, elm) =>
 {
     let date = new Date(ts * 1000);
-    const month = date.getMonth();
-    const day = date.getDay();
+    const month = date.getMonth() + 1; //戻り値が０から始まるため+1
+    const day = date.getDate();
     const hour = date.getHours();
-    const min = date.getMinutes();
+    let min = date.getMinutes();
+
+    if(min < 10)
+    {
+        min = "0" + min.toString();
+    }
 
     let postTime = document.createElement("div");
     postTime.classList.add("PostTime");
@@ -128,7 +133,7 @@ const GetChannelHistory = ts =>
 
 const CreateUserMap = () =>
 {
-    let url = `https://slack.com/api/users.list?token=${token}`;
+    const url = `https://slack.com/api/users.list?token=${token}`;
 
     let xhr = new XMLHttpRequest();
 
@@ -145,7 +150,7 @@ const CreateUserMap = () =>
 const sendMessage = () =>
 {
     let textarea = document.getElementById("SendBox");
-    let url = `https://slack.com/api/chat.postMessage?token=${token}&channel=CD3LD7M2L&text=${textarea.value}`;
+    const url = `https://slack.com/api/chat.postMessage?token=${token}&channel=${channelID}&text=${textarea.value}`;
     let xhr = new XMLHttpRequest();
     
     xhr.open("GET",url,false);
@@ -156,8 +161,27 @@ const sendMessage = () =>
     location.reload();
 }
 
+const getChannelName = () =>
+{
+    const url = `https://slack.com/api/channels.info?token=${token}&channel=${channelID}`;
+    let xhr = new XMLHttpRequest();
+
+    let header = document.getElementById("header");
+    let elem = document.createElement("p");
+
+    xhr.open("GET",url,false);
+    xhr.send(null);
+
+    let response = JSON.parse(xhr.responseText); 
+
+    elem.innerHTML = response.channel.name.toString();
+
+    header.appendChild(elem);
+}
+
 window.onload = () =>
 {
+    getChannelName();
     CreateUserMap();
     GetMessages(Date.now());
 }
