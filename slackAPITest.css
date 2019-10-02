@@ -5,7 +5,7 @@
     overflow: hidden;
 }
 
-.header
+#header
 {
     position:fixed;
     width:100%;
@@ -17,7 +17,7 @@
     z-index: 10;
 }
 
-.header p
+#header p
 {
     display: flex;
     width: 30%;
@@ -26,7 +26,7 @@
     color: #FFF;
 }
 
-.header a
+#header a
 {
     position: fixed;
     display: flex;
@@ -46,7 +46,7 @@
 .chat
 {
     text-align: left;
-    margin: 50px 0 0 0 ;
+    margin: 50px 0 50px 0 ;
 }
 
 .othersComment
@@ -147,7 +147,7 @@
     position: fixed;
     display: inline-block;
     
-    width: 2%; height: 2%;
+    width: 40px; height: 2%;
     top: 93%; left: 90%;
     text-align: center;
 
